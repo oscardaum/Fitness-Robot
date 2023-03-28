@@ -1,5 +1,6 @@
 import cv2
 import mediapipe as mp
+import subprocess
 
 # Initialize the MediaPipe Pose model
 mp_pose = mp.solutions.pose
@@ -43,6 +44,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
                 
                 # Check if enough consecutive correct frames have been detected to consider it a valid squat
                 if correct_frames >= min_frames:
+                    subprocess.run("C:\Python27\python.exe naoqi_demo.py")
                     print("Squat detected!")
                     # Reset the counter for consecutive correct frames
                     correct_frames = 0
