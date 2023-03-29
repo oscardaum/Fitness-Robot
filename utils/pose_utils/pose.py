@@ -8,10 +8,13 @@ from utils.timer_utils import Timer
 from utils.drawing_utils import Draw
 from utils.pose_utils.const import POSE, PRESENCE_THRESHOLD, VISIBILITY_THRESHOLD
 
+import subprocess
+
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5)
+python27_path = "C:\Python27\python.exe  naoqi_demo.py"
 
 class Pose():
     """ Base: Pose Class """
@@ -545,6 +548,7 @@ class Squat(Pose):
             self.is_squat = True
         if norm_diff_y > 0.5 and self.is_squat is True:
             self.squats_count += 1
+            subprocess.run(python27_path + " --speech \"" + str(self.squats_count) + " squats. Good job!\"")
             self.is_squat = False
 
     def measure(self) -> None:
