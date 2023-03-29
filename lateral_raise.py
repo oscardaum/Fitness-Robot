@@ -19,6 +19,15 @@ raise_count = 0
 # Open a video capture device
 cap = cv2.VideoCapture(0)
 
+#Define naoqi execution path, could be different for different people, maybe pass this in as an argument idk
+python27_path = "C:\Python27\python.exe  naoqi_demo.py"
+
+subprocess.run(python27_path + " --movement wake_up")
+subprocess.run(python27_path + " --speech \"“Hi my name is Jaunty and I’m a NAO robot. Today I will be assisting you with a lateral raise exercise. Tap my head when you’re ready to start”\"")
+
+subprocess.run(python27_path + " --speech \"Do five lat raises with me!\" --movement lat_raise")
+#Now do 5 lat raises
+
 # Loop over the frames in the video
 while True:
     # Read the next frame from the video capture device
@@ -60,8 +69,12 @@ while True:
             # isLatRaise = True
             raise_count += 1
             print(raise_count, "lat raises detected, the angles were: ", left_angle, right_angle)
+            subprocess.run(python27_path + " --speech \"" + str(raise_count) + " lat raises. Good job!\"")
 
-            time.sleep(5)
+            time.sleep(3)
+
+            if(raise_count==5):
+                subprocess.run(python27_path + "--movement rest")
 
         # Draw the pose detection lines on the image
         mp_drawing = mp.solutions.drawing_utils
