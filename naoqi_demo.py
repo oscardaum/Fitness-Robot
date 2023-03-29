@@ -134,9 +134,9 @@ def main(IP, port, movement, speech):
         speechProxy.say(speech)
     
     
-    if movement=="latRaise":
+    if movement=="lat_raise":
         lat_raise(motionProxy)
-    elif movement=="wakeUp":
+    elif movement=="wake_up":
         wake_up(motionProxy)
     elif movement=="rest":
         rest(motionProxy)
