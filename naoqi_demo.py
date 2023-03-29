@@ -2,8 +2,7 @@ from naoqi import ALProxy
 import time
 import argparse
 
-def latRaise(motionProxy):
-    motionProxy.wakeUp()
+def lat_raise(motionProxy):
     #RShoulderRoll 
 
     # Choregraphe bezier export in Python.
@@ -121,17 +120,26 @@ def latRaise(motionProxy):
     except BaseException, err:
         print err
 
-def main(IP, movement, speech):
-    IP = "192.168.1.147"
-    motionProxy = ALProxy("ALMotion", IP, 9559)
-    speechProxy = ALProxy("ALTextToSpeech", IP, 9559)
+def wake_up(motionProxy):
+    motionProxy.wakeUp()
 
-    if speech=="Nice lat raise!":
-        speechProxy.say(speech)
-    elif movement=="latRaise":
-        latRaise(motionProxy)
-
+def rest(motionProxy):
     motionProxy.rest()
+
+def main(IP, port, movement, speech):
+    motionProxy = ALProxy("ALMotion", IP, port)
+    speechProxy = ALProxy("ALTextToSpeech", IP, port)
+
+    if speech!=None:
+        speechProxy.say(speech)
+    
+    
+    if movement=="lat_raise":
+        lat_raise(motionProxy)
+    elif movement=="wake_up":
+        wake_up(motionProxy)
+    elif movement=="rest":
+        rest(motionProxy)
 
 
     
@@ -141,8 +149,8 @@ if __name__ == "__main__":
                         help="Robot ip address")
     parser.add_argument("--port", type=int, default=9559,
                         help="Robot port number")
-    parser.add_argument("--movement", type=str, default="latRaise")
-    parser.add_argument("--speech", type=str, default="Nice lat raise!")
+    parser.add_argument("--movement", type=str, default=None)
+    parser.add_argument("--speech", type=str, default=None)
 
     args = parser.parse_args()
-    main(args.ip, args.movement, args.speech)
+    main(args.ip, args.port, args.movement, args.speech)
