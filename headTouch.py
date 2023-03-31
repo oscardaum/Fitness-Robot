@@ -21,9 +21,9 @@ class HeadTouchModule(ALModule):
 
     def onHeadTouch(self, *_args):
         memory.unsubscribeToEvent("MiddleTactilTouched", "HeadTouch")
-
         self.tts.say("Hello! Let's start with some lateral raises!")
-        memory.subscribeToEvent("MiddleTactilTouched", "HeadTouch", "onHeadTouch")
+        sys.exit(0)
+
 
 def run():
     while True:
@@ -32,7 +32,6 @@ def run():
         print
         print "Interrupted by user, shutting down"
         myBroker.shutdown()
-        sys.exit(0)
 
 def main():
     IP = "192.168.1.147"
