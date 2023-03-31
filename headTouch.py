@@ -9,6 +9,7 @@ from naoqi import ALModule
 
 HeadTouch = None
 memory = None
+touched = False
 
 class HeadTouchModule(ALModule):
     def __init__(self, name):
@@ -20,26 +21,24 @@ class HeadTouchModule(ALModule):
         memory.subscribeToEvent("MiddleTactilTouched", "HeadTouch", "onHeadTouch")
 
     def onHeadTouch(self, *_args):
+        global touched
+
+        touched = True
         memory.unsubscribeToEvent("MiddleTactilTouched", "HeadTouch")
         self.tts.say("Hello! Let's start with some lateral raises!")
-        sys.exit(0)
-
-
-def run():
-    while True:
-        time.sleep(1)
-    except KeyboardInterrupt:
-        print
-        print "Interrupted by user, shutting down"
-        myBroker.shutdown()
 
 def main():
     IP = "192.168.1.147"
     myBroker = ALBroker("myBroker", "0.0.0.0", 0, IP, 9559)
 
-    global HeadTouch
+    global HeadTouch, touched
     HeadTouch = HeadTouchModule("HeadTouch")
-    run()
+    
+    while True:
+        time.sleep(1)
+        if(touched):
+            myBroker.shutdown()
+            sys.exit(0)
 
 
 
