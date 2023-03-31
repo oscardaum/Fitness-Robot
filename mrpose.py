@@ -12,6 +12,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     python27_path = "C:\Python27\python.exe  naoqi_demo.py"
+    subprocess.run("C:\Python27\python.exe  headTouch.py")
     subprocess.run(python27_path + " --movement wake_up")
     subprocess.run(python27_path + " --speech \"“Hi my name is Jaunty and I’m a NAO robot. Today I will be assisting you with squats. Tap my head when you’re ready to start”\"")
 
