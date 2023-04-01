@@ -25,7 +25,6 @@ class HeadTouchModule(ALModule):
 
         touched = True
         memory.unsubscribeToEvent("MiddleTactilTouched", "HeadTouch")
-        self.tts.say("Hello! Let's start with some lateral raises!")
 
 def main():
     IP = "192.168.1.147"

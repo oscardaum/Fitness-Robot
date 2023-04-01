@@ -548,7 +548,9 @@ class Squat(Pose):
             self.is_squat = True
         if norm_diff_y > 0.5 and self.is_squat is True:
             self.squats_count += 1
-            subprocess.run(python27_path + " --speech \"" + str(self.squats_count) + " squats. Good job!\"")
+            speech = "You’ve done " + str(self.squats_count) + " squats! You have " + str(5-self.squats_count) + " left. Lets go again."
+
+            subprocess.run(python27_path + " --speech \"" + speech + "\"")
             self.is_squat = False
 
     def measure(self) -> None:
@@ -588,9 +590,10 @@ class Squat(Pose):
                 squad_count_current = self.squats_count
                 if self.squats_count > 0 and abs(squad_count_current - squads_count_prev) == 1:
                     progress_counter += 1
-                    if progress_counter == 10:
+                    if progress_counter == 5:
                         progress_counter = 0
                         progress_bar_color = random.choices(range(128, 256), k=3)
+                        break
 
             out.write(image)
             cv2.imshow('Squats', image)
@@ -624,6 +627,7 @@ class Jumpingjack(Pose):
         right_shoulder_ankle = self.is_point_in_keypoints("right_shoulder") and self.is_point_in_keypoints("right_ankle")
         left_hip_ankle = self.is_point_in_keypoints("left_hip") and self.is_point_in_keypoints("left_ankle")
         right_hip_ankle = self.is_point_in_keypoints("right_hip") and self.is_point_in_keypoints("right_ankle")
+        ang = 0
         if left_shoulder_ankle or right_shoulder_ankle:
             shoulder = "left_shoulder" if left_shoulder_ankle else "right_shoulder"
             ankle = "left_ankle" if left_shoulder_ankle else "right_ankle"
@@ -639,6 +643,8 @@ class Jumpingjack(Pose):
             self.is_jumping_jack = True
         if norm_diff_y < 0 and self.is_jumping_jack is True:
             self.jumping_jack_count += 1
+            speech = "You’ve done " + str(self.jumping_jack_count) + "jumping jacks! You have " + str(5-self.jumping_jack_count) + " left. Lets go again."
+            subprocess.run(python27_path + " --speech \"" + speech+"\"")
             self.is_jumping_jack = False
 
     def measure(self) -> None:
@@ -678,9 +684,10 @@ class Jumpingjack(Pose):
                 jj_count_current = self.jumping_jack_count
                 if self.jumping_jack_count > 0 and abs(jj_count_current - jj_count_prev) == 1:
                     progress_counter += 1
-                    if progress_counter == 10:
+                    if progress_counter == 5:
                         progress_counter = 0
                         progress_bar_color = random.choices(range(128, 256), k=3)
+                        break
 
             out.write(image)
             cv2.imshow('JumpingJacks', image)
