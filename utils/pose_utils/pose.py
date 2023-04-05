@@ -532,6 +532,9 @@ class Squat(Pose):
         super().__init__(video_reader)
         self.video_reader = video_reader
         self.squats_count = 0
+        self.timer = Timer()
+        self.start_time = None
+        self.total_time = 0
         self.is_squat = False
 
     def pose_algorithm(self):
@@ -552,6 +555,24 @@ class Squat(Pose):
 
             subprocess.run(python27_path + " --speech \"" + speech + "\"")
             self.is_squat = False
+    
+    def excess_hold_time(self):
+        while self.video_reader.is_opened():
+            head_point = self.get_available_point(["nose", "left_ear", "right_ear", "left_eye", "right_eye"])
+            ankle = self.get_available_point(["left_ankle", "right_ankle"])
+            if head_point is None or ankle is None:
+                if self.start_time is not None:
+
+            diff_y = self.operation.dist_y(head_point, ankle)
+            norm_diff_y = self.operation.normalize(diff_y, 0, self.height)
+            if norm_diff_y < 0.5:
+                self.timer.start()
+                self.start_time = self.timer._start_time
+            else:
+                self.timer.end()
+                self.total_time = self.timer._total_time
+                break
+        return self.total_time
 
     def measure(self) -> None:
         """ Measure squats (base function) """
@@ -593,6 +614,8 @@ class Squat(Pose):
                     if progress_counter == 5:
                         progress_counter = 0
                         progress_bar_color = random.choices(range(128, 256), k=3)
+                        hold_time = self.excess_hold_time()
+                        self.draw.pose_text(image, "Squats Hold Time: " + str(hold_time))
                         break
 
             out.write(image)
