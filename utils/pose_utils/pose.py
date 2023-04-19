@@ -360,7 +360,7 @@ class Pushup(Pose):
                 pushup_count_current = self.pushups_count
                 if self.pushups_count > 0 and abs(pushup_count_current - pushup_count_prev) == 1:
                     progress_counter += 1
-                    if progress_counter == 10:
+                    if progress_counter == 5:
                         progress_counter = 0
                         progress_bar_color = random.choices(range(128, 256), k=3)
 
@@ -560,8 +560,6 @@ class Squat(Pose):
         while self.video_reader.is_opened():
             head_point = self.get_available_point(["nose", "left_ear", "right_ear", "left_eye", "right_eye"])
             ankle = self.get_available_point(["left_ankle", "right_ankle"])
-            if head_point is None or ankle is None:
-                if self.start_time is not None:
 
             diff_y = self.operation.dist_y(head_point, ankle)
             norm_diff_y = self.operation.normalize(diff_y, 0, self.height)
