@@ -356,6 +356,463 @@ def jumping_jack(motionProxy):
     except BaseException, err:
         print err
 
+def arms_up(motionProxy):
+    names = list()
+    times = list()
+    keys = list()
+
+    names.append("HeadPitch")
+    times.append([0.92])
+    keys.append([[-0.15651, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("HeadYaw")
+    times.append([0.92])
+    keys.append([[0.0152981, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("LAnklePitch")
+    times.append([0.92])
+    keys.append([[0.0889301, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("LAnkleRoll")
+    times.append([0.92])
+    keys.append([[-0.108872, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("LElbowRoll")
+    times.append([0.92])
+    keys.append([[-1.50635, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("LElbowYaw")
+    times.append([0.92])
+    keys.append([[-1.61534, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("LHand")
+    times.append([0.92])
+    keys.append([[0.0172, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("LHipPitch")
+    times.append([0.92])
+    keys.append([[0.124296, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("LHipRoll")
+    times.append([0.92])
+    keys.append([[0.121228, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("LHipYawPitch")
+    times.append([0.92])
+    keys.append([[-0.170232, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("LKneePitch")
+    times.append([0.92])
+    keys.append([[-0.096684, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("LShoulderPitch")
+    times.append([0.92])
+    keys.append([[0.174834, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("LShoulderRoll")
+    times.append([0.92])
+    keys.append([[0.951038, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("LWristYaw")
+    times.append([0.92])
+    keys.append([[-1.51103, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("RAnklePitch")
+    times.append([0.92])
+    keys.append([[0.0859461, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("RAnkleRoll")
+    times.append([0.92])
+    keys.append([[0.112024, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("RElbowRoll")
+    times.append([0.92])
+    keys.append([[1.53864, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("RElbowYaw")
+    times.append([0.92])
+    keys.append([[1.8561, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("RHand")
+    times.append([0.92])
+    keys.append([[0.0208, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("RHipPitch")
+    times.append([0.92])
+    keys.append([[0.133416, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("RHipRoll")
+    times.append([0.92])
+    keys.append([[-0.125746, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("RHipYawPitch")
+    times.append([0.92])
+    keys.append([[-0.170232, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("RKneePitch")
+    times.append([0.92])
+    keys.append([[-0.0935321, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("RShoulderPitch")
+    times.append([0.92])
+    keys.append([[0.266958, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("RShoulderRoll")
+    times.append([0.92])
+    keys.append([[-1.07998, [3, -0.32, 0], [3, 0, 0]]])
+
+    names.append("RWristYaw")
+    times.append([0.92])
+    keys.append([[1.37749, [3, -0.32, 0], [3, 0, 0]]])
+
+    try:
+        motionProxy.angleInterpolationBezier(names, times, keys)
+    except BaseException, err:
+        print err
+
+def fist_pump(motionProxy):
+    names = list()
+    times = list()
+    keys = list()
+
+    names.append("HeadPitch")
+    times.append([0.96, 2.48])
+    keys.append([[-0.213268, [3, -0.333333, 0], [3, 0.506667, 0]], [-0.293036, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("HeadYaw")
+    times.append([0.96, 2.48])
+    keys.append([[0.0168321, [3, -0.333333, 0], [3, 0.506667, 0]], [-0.01845, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("LAnklePitch")
+    times.append([0.96, 2.48])
+    keys.append([[0.0919981, [3, -0.333333, 0], [3, 0.506667, 0]], [0.0919981, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("LAnkleRoll")
+    times.append([0.96, 2.48])
+    keys.append([[-0.110406, [3, -0.333333, 0], [3, 0.506667, 0]], [-0.110406, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("LElbowRoll")
+    times.append([0.96, 2.48])
+    keys.append([[-0.469362, [3, -0.333333, 0], [3, 0.506667, 0]], [-0.469362, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("LElbowYaw")
+    times.append([0.96, 2.48])
+    keys.append([[-1.08918, [3, -0.333333, 0], [3, 0.506667, 0]], [-1.08918, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("LHand")
+    times.append([0.96, 2.48])
+    keys.append([[0.3664, [3, -0.333333, 0], [3, 0.506667, 0]], [0.3664, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("LHipPitch")
+    times.append([0.96, 2.48])
+    keys.append([[0.131966, [3, -0.333333, 0], [3, 0.506667, 0]], [0.131966, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("LHipRoll")
+    times.append([0.96, 2.48])
+    keys.append([[0.115092, [3, -0.333333, 0], [3, 0.506667, 0]], [0.115092, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("LHipYawPitch")
+    times.append([0.96, 2.48])
+    keys.append([[-0.171766, [3, -0.333333, 0], [3, 0.506667, 0]], [-0.171766, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("LKneePitch")
+    times.append([0.96, 2.48])
+    keys.append([[-0.09515, [3, -0.333333, 0], [3, 0.506667, 0]], [-0.0844119, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("LShoulderPitch")
+    times.append([0.96, 2.48])
+    keys.append([[1.60606, [3, -0.333333, 0], [3, 0.506667, 0]], [1.60606, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("LShoulderRoll")
+    times.append([0.96, 2.48])
+    keys.append([[0.115008, [3, -0.333333, 0], [3, 0.506667, 0]], [0.115008, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("LWristYaw")
+    times.append([0.96, 2.48])
+    keys.append([[-0.469446, [3, -0.333333, 0], [3, 0.506667, 0]], [-0.469446, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("RAnklePitch")
+    times.append([0.96, 2.48])
+    keys.append([[0.09515, [3, -0.333333, 0], [3, 0.506667, 0]], [0.09515, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("RAnkleRoll")
+    times.append([0.96, 2.48])
+    keys.append([[0.112024, [3, -0.333333, 0], [3, 0.506667, 0]], [0.112024, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("RElbowRoll")
+    times.append([0.96, 2.48])
+    keys.append([[1.53404, [3, -0.333333, 0], [3, 0.506667, 0]], [0.131966, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("RElbowYaw")
+    times.append([0.96, 2.48])
+    keys.append([[1.24096, [3, -0.333333, 0], [3, 0.506667, 0]], [0.539926, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("RHand")
+    times.append([0.96, 2.48])
+    keys.append([[0.0732, [3, -0.333333, 0], [3, 0.506667, 0]], [0.0732, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("RHipPitch")
+    times.append([0.96, 2.48])
+    keys.append([[0.122678, [3, -0.333333, 0], [3, 0.506667, 0]], [0.121144, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("RHipRoll")
+    times.append([0.96, 2.48])
+    keys.append([[-0.122678, [3, -0.333333, 0], [3, 0.506667, 0]], [-0.122678, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("RHipYawPitch")
+    times.append([0.96, 2.48])
+    keys.append([[-0.171766, [3, -0.333333, 0], [3, 0.506667, 0]], [-0.171766, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("RKneePitch")
+    times.append([0.96, 2.48])
+    keys.append([[-0.0873961, [3, -0.333333, 0], [3, 0.506667, 0]], [-0.0873961, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("RShoulderPitch")
+    times.append([0.96, 2.48])
+    keys.append([[-0.110406, [3, -0.333333, 0], [3, 0.506667, 0]], [-1.46953, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("RShoulderRoll")
+    times.append([0.96, 2.48])
+    keys.append([[-1.2027, [3, -0.333333, 0], [3, 0.506667, 0]], [-0.0629361, [3, -0.506667, 0], [3, 0, 0]]])
+
+    names.append("RWristYaw")
+    times.append([0.96, 2.48])
+    keys.append([[0.558334, [3, -0.333333, 0], [3, 0.506667, 0]], [-0.30991, [3, -0.506667, 0], [3, 0, 0]]])
+
+    try:
+        # uncomment the following line and modify the IP if you use this script outside Choregraphe.
+        motionProxy.angleInterpolationBezier(names, times, keys)
+    except BaseException, err:
+        print err
+
+def front_flex(motionProxy):
+    names = list()
+    times = list()
+    keys = list()
+
+    names.append("HeadPitch")
+    times.append([0.84])
+    keys.append([[-0.243948, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("HeadYaw")
+    times.append([0.84])
+    keys.append([[0.105804, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LAnklePitch")
+    times.append([0.84])
+    keys.append([[-0.474048, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LAnkleRoll")
+    times.append([0.84])
+    keys.append([[-0.102736, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LElbowRoll")
+    times.append([0.84])
+    keys.append([[-0.858998, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LElbowYaw")
+    times.append([0.84])
+    keys.append([[-0.57069, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LHand")
+    times.append([0.84])
+    keys.append([[0.0112, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LHipPitch")
+    times.append([0.84])
+    keys.append([[-0.542994, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LHipRoll")
+    times.append([0.84])
+    keys.append([[0.1335, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LHipYawPitch")
+    times.append([0.84])
+    keys.append([[-0.271476, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LKneePitch")
+    times.append([0.84])
+    keys.append([[1.0983, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LShoulderPitch")
+    times.append([0.84])
+    keys.append([[0.882008, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LShoulderRoll")
+    times.append([0.84])
+    keys.append([[0.421808, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LWristYaw")
+    times.append([0.84])
+    keys.append([[0.737812, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RAnklePitch")
+    times.append([0.84])
+    keys.append([[-0.417206, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RAnkleRoll")
+    times.append([0.84])
+    keys.append([[0.101286, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RElbowRoll")
+    times.append([0.84])
+    keys.append([[0.875956, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RElbowYaw")
+    times.append([0.84])
+    keys.append([[0.404934, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RHand")
+    times.append([0.84])
+    keys.append([[0.0112, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RHipPitch")
+    times.append([0.84])
+    keys.append([[-0.477116, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RHipRoll")
+    times.append([0.84])
+    keys.append([[-0.0475121, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RHipYawPitch")
+    times.append([0.84])
+    keys.append([[-0.271476, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RKneePitch")
+    times.append([0.84])
+    keys.append([[1.00021, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RShoulderPitch")
+    times.append([0.84])
+    keys.append([[0.765508, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RShoulderRoll")
+    times.append([0.84])
+    keys.append([[-0.37127, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RWristYaw")
+    times.append([0.84])
+    keys.append([[-0.382008, [3, -0.293333, 0], [3, 0, 0]]])
+
+    try:
+        motionProxy.angleInterpolationBezier(names, times, keys)
+    except BaseException, err:
+        print err
+
+def push_up(motionProxy):
+    names = list()
+    times = list()
+    keys = list()
+
+    names.append("HeadPitch")
+    times.append([0.84])
+    keys.append([[-0.243948, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("HeadYaw")
+    times.append([0.84])
+    keys.append([[0.105804, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LAnklePitch")
+    times.append([0.84])
+    keys.append([[-0.474048, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LAnkleRoll")
+    times.append([0.84])
+    keys.append([[-0.102736, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LElbowRoll")
+    times.append([0.84])
+    keys.append([[-0.858998, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LElbowYaw")
+    times.append([0.84])
+    keys.append([[-0.57069, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LHand")
+    times.append([0.84])
+    keys.append([[0.0112, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LHipPitch")
+    times.append([0.84])
+    keys.append([[-0.542994, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LHipRoll")
+    times.append([0.84])
+    keys.append([[0.1335, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LHipYawPitch")
+    times.append([0.84])
+    keys.append([[-0.271476, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LKneePitch")
+    times.append([0.84])
+    keys.append([[1.0983, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LShoulderPitch")
+    times.append([0.84])
+    keys.append([[0.882008, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LShoulderRoll")
+    times.append([0.84])
+    keys.append([[0.421808, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("LWristYaw")
+    times.append([0.84])
+    keys.append([[0.737812, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RAnklePitch")
+    times.append([0.84])
+    keys.append([[-0.417206, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RAnkleRoll")
+    times.append([0.84])
+    keys.append([[0.101286, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RElbowRoll")
+    times.append([0.84])
+    keys.append([[0.875956, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RElbowYaw")
+    times.append([0.84])
+    keys.append([[0.404934, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RHand")
+    times.append([0.84])
+    keys.append([[0.0112, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RHipPitch")
+    times.append([0.84])
+    keys.append([[-0.477116, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RHipRoll")
+    times.append([0.84])
+    keys.append([[-0.0475121, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RHipYawPitch")
+    times.append([0.84])
+    keys.append([[-0.271476, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RKneePitch")
+    times.append([0.84])
+    keys.append([[1.00021, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RShoulderPitch")
+    times.append([0.84])
+    keys.append([[0.765508, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RShoulderRoll")
+    times.append([0.84])
+    keys.append([[-0.37127, [3, -0.293333, 0], [3, 0, 0]]])
+
+    names.append("RWristYaw")
+    times.append([0.84])
+    keys.append([[-0.382008, [3, -0.293333, 0], [3, 0, 0]]])
+
+    try:
+        motionProxy.angleInterpolationBezier(names, times, keys)
+    except BaseException, err:
+        print err
+
 def get_mood(moodProxy):
     emotion = moodProxy.getEmotionalReaction()
     return emotion
