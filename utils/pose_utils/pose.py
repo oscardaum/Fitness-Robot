@@ -276,11 +276,12 @@ class Pose():
 
 class Pushup(Pose):
     """ Sub: Pushup class """
-    def __init__(self, video_reader) -> None:
+    def __init__(self, video_reader, encouragement) -> None:
         super().__init__(video_reader)
         self.video_reader = video_reader
         self.pushups_count = 0
         self.is_pushup = False
+        self.encouragement = encouragement
 
     def _draw(self, image):
         """ Draw lines between shoulder, wrist and foot """

@@ -9,10 +9,14 @@ if __name__ == '__main__':
     parser.add_argument('-e', "--exercise", required=False, default="pushup",
                         help="Type of exercise in video source",
                         type=str, choices=['predict', 'pushup', 'plank', 'squat', 'jumpingjack'])
+    parser.add_argument('-n', "--nao", required=False, default="level1",
+                        help="Type of exercise in video source",
+                        type=str, choices=['level1', 'level2', 'level3'])
     args = parser.parse_args()
 
     video = args.video
     exercise = args.exercise
+    encouragement = args.nao
 
     python27_path = "C:\Python27\python.exe  naoqi_demo.py"
     subprocess.run("C:\Python27\python.exe  headTouch.py")
@@ -23,9 +27,9 @@ if __name__ == '__main__':
     subprocess.run(python27_path + " --speech \"Do five pushups with me! To do a pushup, get on the ground, raise your torso off the ground, and move your arms back and forth like this.\" --movement pushup")
 
 
-    pose = Exercise(video, "pushup")
+    pose = Exercise(video, "pushup", encouragement)
     pose.estimate_exercise()
-    pose = Exercise(video, "plank")
+    pose = Exercise(video, "plank", encouragement)
     pose.estimate_exercise()
 
     # subprocess.run(python27_path + " --speech \"Good job! You did great! I hope I was able to help you with exercise today!\"")
