@@ -307,19 +307,20 @@ class Pushup(Pose):
         # Distance algorithm
         head_point = self.get_available_point(["nose", "left_ear", "right_ear", "left_eye", "right_eye"])
         ankle = self.get_available_point(["left_ankle", "right_ankle"])
-        if head_point is None or ankle is None:
+        wrist = self.get_available_point(["left_wrist", "right_wrist"])
+
+        if head_point is None or ankle is None or wrist is None:
             return
 
         diff_y = self.operation.dist_y(head_point, ankle)
 
         # Angle algorithm
         head_pos = self.operation.point_position(head_point, (self.width / 2, 0), (self.width / 2, self.height))
-        wrist = self.get_available_point(["left_wrist", "right_wrist"])
         ang = self.operation.angle(head_point, ankle, wrist)
         print(diff_y, ang, self.is_pushup)
-        if diff_y < 250 and (ang < 40 and head_pos == "right") or (ang > 140 and head_pos == "left"):
+        if diff_y < 200 and ((ang < 40 and head_pos == "right") or (ang > 140 and head_pos == "left")):
             self.is_pushup = True
-        if diff_y > 300 and self.is_pushup is True:
+        if diff_y > 260 and self.is_pushup is True:
             self.pushups_count += 1
             self.is_pushup = False
 
@@ -382,6 +383,7 @@ class Plank(Pose):
         self.plank_counter = 0
         self.start_time = None
         self.total_time = 0
+        self.is_plank = False
 
     def _draw(self, image):
         """ Draw lines between shoulder, wrist and foot """
@@ -472,23 +474,23 @@ class Plank(Pose):
             del self.ang1_tracker[0]
             del self.ang4_tracker[0]
             if ang1_diff_mean < 5 and not 75 <= ang4_mean <= 105:
-                # is_plank = True
+                self.is_plank = True
                 if self.start_time is None:
                     self.timer.start()
                 self.start_time = self.timer._start_time
             else:
-                # is_plank = False
+                self.is_plank = False
                 if self.start_time is not None:
                     self.timer.end()
                     self.total_time = self.timer._total_time
-                self.start_time = None
+                #self.start_time = None
 
     def measure(self) -> None:
         """ Measure planks (base function) """
         if self.video_reader.is_opened() is False:
             print("Error File Not Found.")
 
-        time_adjustment = 6 / self.video_fps # 6 is magic number
+        time_adjustment = 25 / self.video_fps # 6 is magic number
         progress_counter = 0
         progress_bar_color = (255, 255, 255)
         out = cv2.VideoWriter("output.avi", self.fourcc, self.video_fps, (self.width, self.height))
@@ -513,6 +515,9 @@ class Plank(Pose):
             image = cv2.rectangle(image, (0, self.height//8 - 10), (self.width//60 * progress_counter, self.height//8),
                                         progress_bar_color, cv2.FILLED)
             if results.pose_landmarks is not None:
+                if self.is_plank is False and self.start_time is not None:
+                    break
+
                 self.key_points = self.get_keypoints(image, results)
                 self.pose_algorithm()
                 image = self._draw(image)
