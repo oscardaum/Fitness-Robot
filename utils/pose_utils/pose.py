@@ -316,6 +316,7 @@ class Pushup(Pose):
         head_pos = self.operation.point_position(head_point, (self.width / 2, 0), (self.width / 2, self.height))
         wrist = self.get_available_point(["left_wrist", "right_wrist"])
         ang = self.operation.angle(head_point, ankle, wrist)
+        print(diff_y, ang, self.is_pushup)
         if diff_y < 250 and (ang < 40 and head_pos == "right") or (ang > 140 and head_pos == "left"):
             self.is_pushup = True
         if diff_y > 300 and self.is_pushup is True:
@@ -360,7 +361,8 @@ class Pushup(Pose):
                 pushup_count_current = self.pushups_count
                 if self.pushups_count > 0 and abs(pushup_count_current - pushup_count_prev) == 1:
                     progress_counter += 1
-                    if progress_counter == 5:
+                    if progress_counter == 3:
+                        break
                         progress_counter = 0
                         progress_bar_color = random.choices(range(128, 256), k=3)
 
