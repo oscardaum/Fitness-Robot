@@ -356,15 +356,20 @@ def jumping_jack(motionProxy):
     except BaseException, err:
         print err
 
+def get_mood(moodProxy):
+    emotion = moodProxy.getEmotionalReaction()
+    return emotion
+
 def wake_up(motionProxy):
     motionProxy.wakeUp()
 
 def rest(motionProxy):
     motionProxy.rest()
 
-def main(IP, port, movement, speech):
+def main(IP, port, movement, speech, mood):
     motionProxy = ALProxy("ALMotion", IP, port)
     speechProxy = ALProxy("ALTextToSpeech", IP, port)
+    moodProxy = ALProxy("ALMood", IP, port)
 
     if speech!=None:
         speechProxy.say(speech)
@@ -380,6 +385,9 @@ def main(IP, port, movement, speech):
         wake_up(motionProxy)
     elif movement=="rest":
         rest(motionProxy)
+    
+    if mood:
+        return get_mood(moodProxy)
 
     
 if __name__ == "__main__":
@@ -390,6 +398,7 @@ if __name__ == "__main__":
                         help="Robot port number")
     parser.add_argument("--movement", type=str, default=None)
     parser.add_argument("--speech", type=str, default=None)
+    parser.add_argument("--mood", type=bool, default=False)
 
     args = parser.parse_args()
-    main(args.ip, args.port, args.movement, args.speech)
+    main(args.ip, args.port, args.movement, args.speech, args.mood)
