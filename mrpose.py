@@ -27,10 +27,10 @@ if __name__ == '__main__':
     subprocess.run(python27_path + " --speech \"Do five pushups with me! To do a pushup, get on the ground, raise your torso off the ground, and move your arms back and forth like this.\" --movement pushup")
 
 
-    pose = Exercise(video, "pushup", encouragement)
-    pose.estimate_exercise()
-    pose = Exercise(video, "plank", encouragement)
-    pose.estimate_exercise()
+    pose = Exercise(video, "pushup")
+    pose.estimate_exercise(encouragement)
+    pose = Exercise(video, "plank")
+    pose.estimate_exercise(encouragement)
 
     # subprocess.run(python27_path + " --speech \"Good job! You did great! I hope I was able to help you with exercise today!\"")
     # subprocess.run(python27_path + " --movement rest")

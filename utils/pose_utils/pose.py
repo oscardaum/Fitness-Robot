@@ -377,7 +377,7 @@ class Pushup(Pose):
 
 class Plank(Pose):
     """ Sub: Plank class """
-    def __init__(self, video_reader) -> None:
+    def __init__(self, video_reader, encouragement) -> None:
         super().__init__(video_reader)
         self.video_reader = video_reader
         self.timer = Timer()
@@ -385,6 +385,7 @@ class Plank(Pose):
         self.start_time = None
         self.total_time = 0
         self.is_plank = False
+        self.encouragement = encouragement
 
     def _draw(self, image):
         """ Draw lines between shoulder, wrist and foot """
