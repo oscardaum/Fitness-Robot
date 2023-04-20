@@ -319,7 +319,13 @@ class Pushup(Pose):
         head_pos = self.operation.point_position(head_point, (self.width / 2, 0), (self.width / 2, self.height))
         ang = self.operation.angle(head_point, ankle, wrist)
         print(diff_y, ang, self.is_pushup)
-        if diff_y < 200 and ((ang < 40 and head_pos == "right") or (ang > 140 and head_pos == "left")):
+
+        # added code to give feedback based on form (if the person isn't getting low enough on their pushup)
+        if self.encouragement == "level3" and self.is_pushup is False and diff_y >= 180:
+            speech = "You look fantastic, keep going! You just need to get a little lower!"
+            subprocess.run(python27_path + " --speech \" + speech + \"")
+        
+        if diff_y < 180 and ((ang < 40 and head_pos == "right") or (ang > 140 and head_pos == "left")):
             self.is_pushup = True
         if diff_y > 260 and self.is_pushup is True:
             self.pushups_count += 1
@@ -363,7 +369,14 @@ class Pushup(Pose):
                 pushup_count_current = self.pushups_count
                 if self.pushups_count > 0 and abs(pushup_count_current - pushup_count_prev) == 1:
                     progress_counter += 1
-                    if progress_counter == 3:
+                    speech = str(5 - progress_counter) + "push-ups to go!"
+                    if self.encouragement == "level2" or self.encouragement == "level3":
+                        speech = "You’re doing great! " + speech 
+                    subprocess.run(python27_path + " --speech \" + speech + \"")
+                    if progress_counter == 5:
+                        speech = "You’ve completed 5 pushups, good job! Once my head is tapped by one of the experiment conductors, \
+                            I’ll start to time your plank. Please notify one of the experiment conductors when you’re ready to start your plank!"
+                        subprocess.run(python27_path + " --speech \" + speech + \"")
                         break
                         progress_counter = 0
                         progress_bar_color = random.choices(range(128, 256), k=3)
