@@ -370,10 +370,12 @@ def main(IP, port, movement, speech, mood):
     motionProxy = ALProxy("ALMotion", IP, port)
     speechProxy = ALProxy("ALTextToSpeech", IP, port)
     moodProxy = ALProxy("ALMood", IP, port)
+    autonomousProxy = ALProxy("ALAutonomousProxy", IP, port)
+
+    autonomousProxy.setState("safeguard")
 
     if speech!=None:
-        speechProxy.say(speech)
-    
+        speechProxy.say(speech)    
     
     if movement=="lat_raise":
         lat_raise(motionProxy)
