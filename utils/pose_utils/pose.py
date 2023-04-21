@@ -281,7 +281,11 @@ class Pushup(Pose):
         self.video_reader = video_reader
         self.pushups_count = 0
         self.is_pushup = False
+        self.timer = Timer()
+        self.timer_start = True
         self.encouragement = encouragement
+        self.last_encouragement = 0
+        self.poses = ["arms_up", "fist_pump", "front_flex"]
 
     def _draw(self, image):
         """ Draw lines between shoulder, wrist and foot """
@@ -327,9 +331,24 @@ class Pushup(Pose):
         
         if diff_y < 180 and ((ang < 40 and head_pos == "right") or (ang > 140 and head_pos == "left")):
             self.is_pushup = True
+            if self.timer_start:
+                self.timer.start()
+                self.timer_start = False
+            else:
+                self.timer.end()
+                self.timer_start = True
+                time_adjustment = 25 / self.video_fps
+                elapsed_time = round(time_adjustment * (self.timer.get_current_time() + self.timer._total_time), 2)
+                if elapsed_time >= 5:
+                    speech = "You got this, keep going!"
+                    subprocess.run(python27_path + " --speech \"" + speech + "\"")
+                    pose = self.poses[self.last_encouragement]
+                    subprocess.run(python27_path + " --movement \"" + pose + "\"")
+                    self.last_encouragement = (self.last_encouragement + 1) % 3
+
         if diff_y > 260 and self.is_pushup is True:
             self.pushups_count += 1
-            self.is_pushup = False
+            self.is_pushup = False        
 
 
     def measure(self) -> None:
