@@ -329,26 +329,24 @@ class Pushup(Pose):
             speech = "You look fantastic, keep going! You just need to get a little lower!"
             subprocess.Popen(python27_path + " --speech \"" + speech + "\"")
         
+        time_adjustment = 25 / self.video_fps
+        elapsed_time = round(time_adjustment * self.timer.get_current_time(), 2)
+        if elapsed_time >= 5 and self.encouragement == "level3":
+            self.timer.end()
+            self.timer.start()
+            speech = "You got this, keep going!"
+            subprocess.Popen(python27_path + " --speech \"" + speech + "\"")
+            pose = self.poses[self.last_encouragement]
+            subprocess.Popen(python27_path + " --movement \"" + pose + "\"")
+            self.last_encouragement = (self.last_encouragement + 1) % 3
+
         if diff_y < 180 and ((ang < 40 and head_pos == "right") or (ang > 140 and head_pos == "left")):
             self.is_pushup = True
-            if self.timer_start:
-                self.timer.start()
-                self.timer_start = False
-            else:
-                self.timer.end()
-                self.timer_start = True
-                time_adjustment = 25 / self.video_fps
-                elapsed_time = round(time_adjustment * (self.timer.get_current_time() + self.timer._total_time), 2)
-                if elapsed_time >= 5:
-                    speech = "You got this, keep going!"
-                    subprocess.Popen(python27_path + " --speech \"" + speech + "\"")
-                    pose = self.poses[self.last_encouragement]
-                    subprocess.Popen(python27_path + " --movement \"" + pose + "\"")
-                    self.last_encouragement = (self.last_encouragement + 1) % 3
-
         if diff_y > 260 and self.is_pushup is True:
             self.pushups_count += 1
-            self.is_pushup = False        
+            self.is_pushup = False
+            self.timer.end()    
+            self.timer.start()        
 
 
     def measure(self) -> None:
