@@ -827,9 +827,9 @@ def main(IP, port, movement, speech, mood):
     motionProxy = ALProxy("ALMotion", IP, port)
     speechProxy = ALProxy("ALTextToSpeech", IP, port)
     moodProxy = ALProxy("ALMood", IP, port)
-    autonomousProxy = ALProxy("ALAutonomousProxy", IP, port)
+    # autonomousProxy = ALProxy("ALAutonomousProxy", IP, port)
 
-    autonomousProxy.setState("safeguard")
+    # autonomousProxy.setState("safeguard")
 
     if speech!=None:
         speechProxy.say(speech)    
@@ -853,7 +853,7 @@ def main(IP, port, movement, speech, mood):
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--ip", type=str, default="192.168.1.147",
+    parser.add_argument("--ip", type=str, default="192.168.1.146",
                         help="Robot ip address")
     parser.add_argument("--port", type=int, default=9559,
                         help="Robot port number")

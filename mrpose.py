@@ -24,11 +24,11 @@ if __name__ == '__main__':
     subprocess.run("C:\Python27\python.exe  headTouch.py")
     subprocess.run(python27_path + " --movement wake_up")
 
-    intro_speech = "Hi my name is Jaunty and today I’ll lead you through a small workout. We’re going to be doing 5 pushups. To do a pushup, lay on the ground, raise your torso off the ground, and move your arms back and forth like this."
+    intro_speech = "\"Hi my name is Jaunty and today I'll lead you through a small workout. We're going to be doing 5 pushups. To do a pushup, lay on the ground, raise your torso off the ground, and move your arms back and forth like this.\""
     subprocess.run(python27_path + " --speech "+intro_speech + " --movement push_up")
     subprocess.run("C:\Python27\python.exe  headTouch.py")
 
-    pre_pushup = "Now it’s your turn. Start whenever you’re ready and I’ll count down your reps. After your 5th push up, enter a plank position. You’ll now be shown a picture of what a proper plank looks like."
+    pre_pushup = "\"Now it's your turn. Start whenever you're ready and I'll count down your reps. After your 5th push up, enter a plank position. You'll now be shown a picture of what a proper plank looks like.\""
     subprocess.run(python27_path + " --speech "+pre_pushup)
 
     img = Image.open("plank.jpeg")
@@ -39,11 +39,11 @@ if __name__ == '__main__':
     pose = Exercise(video, "pushup")
     pose.estimate_exercise(encouragement)
 
-    pre_plank = "You’ve completed 5 pushups, good job! Once my head is tapped by one of the experiment conductors, I’ll start to time your plank. Please notify one of the experiment conductors when you’re ready to start your plank!"
+    pre_plank = "You've completed 5 pushups, good job! Once my head is tapped by one of the experiment conductors, I'll start to time your plank. Please notify one of the experiment conductors when you're ready to start your plank!"
     subprocess.run("C:\Python27\python.exe  headTouch.py")
 
     pose = Exercise(video, "plank")
     pose.estimate_exercise(encouragement)
 
-    subprocess.run(python27_path + " --speech \"That’s all! Thank you for participating in this round of the experiment\"")
+    subprocess.run(python27_path + " --speech \"That's all! Thank you for participating in this round of the experiment\"")
     subprocess.run(python27_path + " --movement rest")

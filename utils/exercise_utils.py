@@ -15,4 +15,4 @@ class Exercise():
         """ Run estimator """
         pose_estimator = getattr(sys.modules[__name__], self.exercise)
         pose_estimator = pose_estimator(self.video_reader, encouragement)
-        pose_estimator.estimate() if self.exercise == "Pose" else pose_estimator.measure(self.encouragement)
+        pose_estimator.estimate() if self.exercise == "Pose" else pose_estimator.measure()
