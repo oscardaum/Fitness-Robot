@@ -394,6 +394,8 @@ class Plank(Pose):
         super().__init__(video_reader)
         self.video_reader = video_reader
         self.timer = Timer()
+        self.last_encouragement = 0
+        self.poses = ["arms_up", "fist_pump", "front_flex"]
         self.plank_counter = 0
         self.start_time = None
         self.total_time = 0
@@ -531,6 +533,8 @@ class Plank(Pose):
                                         progress_bar_color, cv2.FILLED)
             if results.pose_landmarks is not None:
                 if self.is_plank is False and self.start_time is not None:
+                    speech = "That’s all! Thank you for participating in this round of the experiment"
+                    subprocess.run(python27_path + " --speech \" + speech + \"")
                     break
 
                 self.key_points = self.get_keypoints(image, results)
@@ -540,6 +544,14 @@ class Plank(Pose):
                 h_m_s_ms_time = self.timer.convert_time(time) # convert Seconds to Hour : Minute : Second : Milli-Second format
                 image = self.draw.pose_text(image, "Plank Timer: " + str(h_m_s_ms_time)[:10])
                 progress_counter = int(int(time) % self.video_fps)
+
+                # added periodic encouragement but honestly could be better bc i'm not really keeping track of time
+                if self.encouragement == "level2":
+                    speech = "You got it keep going!" + speech 
+                    subprocess.run(python27_path + " --speech \" + speech + \"")
+                    pose = self.poses[self.last_encouragement]
+                    subprocess.run(python27_path + " --movement \"+ pose +\"")
+                    self.last_encouragement = (self.last_encouragement + 1) % 3
 
             out.write(image)
             cv2.imshow('Planks', image)
