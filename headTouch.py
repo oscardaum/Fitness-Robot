@@ -27,7 +27,7 @@ class HeadTouchModule(ALModule):
         memory.unsubscribeToEvent("MiddleTactilTouched", "HeadTouch")
 
 def main():
-    IP = "192.168.1.147"
+    IP = "192.168.1.146"
     myBroker = ALBroker("myBroker", "0.0.0.0", 0, IP, 9559)
 
     global HeadTouch, touched
