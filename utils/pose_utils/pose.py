@@ -284,6 +284,7 @@ class Pushup(Pose):
         self.timer = Timer()
         self.timer_start = True
         self.encouragement = encouragement
+        self.smart_encouragement = False
         self.last_encouragement = 0
         self.poses = ["arms_up", "fist_pump", "front_flex"]
 
@@ -325,9 +326,10 @@ class Pushup(Pose):
         print(diff_y, ang, self.is_pushup)
 
         # added code to give feedback based on form (if the person isn't getting low enough on their pushup)
-        if self.encouragement == "level3" and self.is_pushup is False and diff_y >= 180:
-            speech = "You look fantastic, keep going! You just need to get a little lower!"
-            subprocess.Popen(python27_path + " --speech \"" + speech + "\"")
+        # if self.encouragement == "level3" and self.is_pushup is False and diff_y >= 180 and diff_y <=230 and self.smart_encouragement is False:
+        #     self.smart_encouragement = True #flag so that it doesn't spam this
+        #     speech = "You look fantastic, keep going! You just need to get a little lower!"
+        #     subprocess.Popen(python27_path + " --speech \"" + speech + "\"")
         
         time_adjustment = 25 / self.video_fps
         elapsed_time = round(time_adjustment * self.timer.get_current_time(), 2)
@@ -343,6 +345,7 @@ class Pushup(Pose):
         if diff_y < 180 and ((ang < 40 and head_pos == "right") or (ang > 140 and head_pos == "left")):
             self.is_pushup = True
         if diff_y > 260 and self.is_pushup is True:
+            self.smart_encouragement = False #reset flag after they do a pushup
             self.pushups_count += 1
             self.is_pushup = False
             self.timer.end()    
@@ -418,6 +421,7 @@ class Plank(Pose):
         self.total_time = 0
         self.is_plank = False
         self.encouragement = encouragement
+        self.smart_encouragement = False
 
     def _draw(self, image):
         """ Draw lines between shoulder, wrist and foot """
@@ -497,13 +501,15 @@ class Plank(Pose):
         if ang3 is not None and ((0 <= ang3 <= 50) or (130 <= ang3 <= 180)):
             if (ang1 is not None or ang2 is not None) and ang4 is not None:
                 #if the shoulder-hip-ankle line is less than 20 degrees
-                if (160 <= ang2 <= 180) or (0 <= ang2 <= 20):
+                if (170 <= ang2 <= 180) or (0 <= ang2 <= 10):
                     self.plank_counter += 1
                     self.ang1_tracker.append(ang1)
                     self.ang4_tracker.append(ang4)
-                elif self.encouragement=="level3": #body isn't straight
+                elif self.encouragement=="level3" and self.smart_encouragement is False: #body isn't straight
                     back_speech = "\"It looks like your body isn't straight enough. Make sure your legs are in line with your torso. You got this!\""
-                    subprocess.run(python27_path + " --speech " + back_speech + " --movement ")
+                    subprocess.Popen(python27_path + " --speech " + back_speech)
+                    self.smart_encouragement = True
+
 
 
         if self.plank_counter >= 24 and len(self.ang1_tracker) == 24 and len(self.ang4_tracker) == 24:
@@ -572,8 +578,8 @@ class Plank(Pose):
                 if self.encouragement == "level2":
                     speech = "You got it keep going!" + speech 
                     subprocess.Popen(python27_path + " --speech \"" + speech + "\"")
-                    pose = self.poses[self.last_encouragement]
-                    subprocess.Popen(python27_path + " --movement \"" + pose + "\"")
+                    next_pose = self.poses[self.last_encouragement]
+                    subprocess.Popen(python27_path + " --movement \"" + next_pose + "\"")
                     self.last_encouragement = (self.last_encouragement + 1) % 3
 
             out.write(image)
