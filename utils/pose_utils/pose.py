@@ -323,7 +323,7 @@ class Pushup(Pose):
         # added code to give feedback based on form (if the person isn't getting low enough on their pushup)
         if self.encouragement == "level3" and self.is_pushup is False and diff_y >= 180:
             speech = "You look fantastic, keep going! You just need to get a little lower!"
-            subprocess.run(python27_path + " --speech \" + speech + \"")
+            subprocess.run(python27_path + " --speech \"" + speech + "\"")
         
         if diff_y < 180 and ((ang < 40 and head_pos == "right") or (ang > 140 and head_pos == "left")):
             self.is_pushup = True
@@ -372,11 +372,11 @@ class Pushup(Pose):
                     speech = str(5 - progress_counter) + "push-ups to go!"
                     if self.encouragement == "level2" or self.encouragement == "level3":
                         speech = "You’re doing great! " + speech 
-                    subprocess.run(python27_path + " --speech \" + speech + \"")
+                    subprocess.run(python27_path + " --speech \"" + speech + "\"")
                     if progress_counter == 5:
                         speech = "You’ve completed 5 pushups, good job! Once my head is tapped by one of the experiment conductors, \
                             I’ll start to time your plank. Please notify one of the experiment conductors when you’re ready to start your plank!"
-                        subprocess.run(python27_path + " --speech \" + speech + \"")
+                        subprocess.run(python27_path + " --speech \"" + speech + "\"")
                         break
                         progress_counter = 0
                         progress_bar_color = random.choices(range(128, 256), k=3)
@@ -534,7 +534,7 @@ class Plank(Pose):
             if results.pose_landmarks is not None:
                 if self.is_plank is False and self.start_time is not None:
                     speech = "That’s all! Thank you for participating in this round of the experiment"
-                    subprocess.run(python27_path + " --speech \" + speech + \"")
+                    subprocess.run(python27_path + " --speech \"" + speech + "\"")
                     break
 
                 self.key_points = self.get_keypoints(image, results)
@@ -548,9 +548,9 @@ class Plank(Pose):
                 # added periodic encouragement but honestly could be better bc i'm not really keeping track of time
                 if self.encouragement == "level2":
                     speech = "You got it keep going!" + speech 
-                    subprocess.run(python27_path + " --speech \" + speech + \"")
+                    subprocess.run(python27_path + " --speech \"" + speech + "\"")
                     pose = self.poses[self.last_encouragement]
-                    subprocess.run(python27_path + " --movement \"+ pose +\"")
+                    subprocess.run(python27_path + " --movement \"" + pose + "\"")
                     self.last_encouragement = (self.last_encouragement + 1) % 3
 
             out.write(image)
