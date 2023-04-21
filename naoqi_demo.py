@@ -844,6 +844,8 @@ def main(IP, port, movement, speech, mood):
         wake_up(motionProxy)
     elif movement=="rest":
         rest(motionProxy)
+    elif movement=="push_up":
+        push_up(motionProxy)
     
     if mood:
         return get_mood(moodProxy)
