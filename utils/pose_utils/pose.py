@@ -475,13 +475,19 @@ class Plank(Pose):
             ang4 = self.one_line_angle(elbow, wrist)
         else:
             pass
-
+        
+        #if the shoulder-ankle or hip-ankle angle is less than 50 or between 130 and 180 (left side or right side?)
         if ang3 is not None and ((0 <= ang3 <= 50) or (130 <= ang3 <= 180)):
             if (ang1 is not None or ang2 is not None) and ang4 is not None:
+                #if the shoulder-hip-ankle line is less than 20 degrees
                 if (160 <= ang2 <= 180) or (0 <= ang2 <= 20):
                     self.plank_counter += 1
                     self.ang1_tracker.append(ang1)
                     self.ang4_tracker.append(ang4)
+                elif self.encouragement=="level3": #body isn't straight
+                    back_speech = "\"It looks like your body isn't straight enough. Make sure your legs are in line with your torso. You got this!\""
+                    subprocess.run(python27_path + " --speech " + back_speech + " --movement ")
+
 
         if self.plank_counter >= 24 and len(self.ang1_tracker) == 24 and len(self.ang4_tracker) == 24:
             ang1_diff1 = abs(self.ang1_tracker[0] - self.ang1_tracker[12])

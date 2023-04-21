@@ -846,6 +846,12 @@ def main(IP, port, movement, speech, mood):
         rest(motionProxy)
     elif movement=="push_up":
         push_up(motionProxy)
+    elif movement=="fist_pump":
+        fist_pump(motionProxy)
+    elif movement=="front_flex":
+        front_flex(motionProxy)
+    elif movement=="arms_up":
+        arms_up(motionProxy)
     
     if mood:
         return get_mood(moodProxy)
