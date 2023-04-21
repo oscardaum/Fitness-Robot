@@ -327,7 +327,7 @@ class Pushup(Pose):
         # added code to give feedback based on form (if the person isn't getting low enough on their pushup)
         if self.encouragement == "level3" and self.is_pushup is False and diff_y >= 180:
             speech = "You look fantastic, keep going! You just need to get a little lower!"
-            subprocess.run(python27_path + " --speech \"" + speech + "\"")
+            subprocess.Popen(python27_path + " --speech \"" + speech + "\"")
         
         if diff_y < 180 and ((ang < 40 and head_pos == "right") or (ang > 140 and head_pos == "left")):
             self.is_pushup = True
@@ -341,9 +341,9 @@ class Pushup(Pose):
                 elapsed_time = round(time_adjustment * (self.timer.get_current_time() + self.timer._total_time), 2)
                 if elapsed_time >= 5:
                     speech = "You got this, keep going!"
-                    subprocess.run(python27_path + " --speech \"" + speech + "\"")
+                    subprocess.Popen(python27_path + " --speech \"" + speech + "\"")
                     pose = self.poses[self.last_encouragement]
-                    subprocess.run(python27_path + " --movement \"" + pose + "\"")
+                    subprocess.Popen(python27_path + " --movement \"" + pose + "\"")
                     self.last_encouragement = (self.last_encouragement + 1) % 3
 
         if diff_y > 260 and self.is_pushup is True:
@@ -391,7 +391,7 @@ class Pushup(Pose):
                     speech = str(5 - progress_counter) + "push-ups to go!"
                     if self.encouragement == "level2" or self.encouragement == "level3":
                         speech = "You’re doing great! " + speech 
-                    subprocess.run(python27_path + " --speech \"" + speech + "\"")
+                    subprocess.Popen(python27_path + " --speech \"" + speech + "\"")
                     if progress_counter == 5:
                         speech = "You’ve completed 5 pushups, good job! Once my head is tapped by one of the experiment conductors, \
                             I’ll start to time your plank. Please notify one of the experiment conductors when you’re ready to start your plank!"
@@ -573,9 +573,9 @@ class Plank(Pose):
                 # added periodic encouragement but honestly could be better bc i'm not really keeping track of time
                 if self.encouragement == "level2":
                     speech = "You got it keep going!" + speech 
-                    subprocess.run(python27_path + " --speech \"" + speech + "\"")
+                    subprocess.Popen(python27_path + " --speech \"" + speech + "\"")
                     pose = self.poses[self.last_encouragement]
-                    subprocess.run(python27_path + " --movement \"" + pose + "\"")
+                    subprocess.Popen(python27_path + " --movement \"" + pose + "\"")
                     self.last_encouragement = (self.last_encouragement + 1) % 3
 
             out.write(image)
@@ -612,7 +612,7 @@ class Squat(Pose):
             self.squats_count += 1
             speech = "You’ve done " + str(self.squats_count) + " squats! You have " + str(5-self.squats_count) + " left. Lets go again."
 
-            subprocess.run(python27_path + " --speech \"" + speech + "\"")
+            #subprocess.run(python27_path + " --speech \"" + speech + "\"")
             self.is_squat = False
     
     def excess_hold_time(self):
@@ -724,7 +724,7 @@ class Jumpingjack(Pose):
         if norm_diff_y < 0 and self.is_jumping_jack is True:
             self.jumping_jack_count += 1
             speech = "You’ve done " + str(self.jumping_jack_count) + "jumping jacks! You have " + str(5-self.jumping_jack_count) + " left. Lets go again."
-            subprocess.run(python27_path + " --speech \"" + speech+"\"")
+            #subprocess.run(python27_path + " --speech \"" + speech+"\"")
             self.is_jumping_jack = False
 
     def measure(self) -> None:
